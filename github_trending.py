@@ -21,7 +21,7 @@ def get_trending_repositories(required_count):
     В качестве параметра передается запрашиваемое количество репозиториев.
     """
     week_ago_date = get_week_ago_date_string()
-    payload = {'q':['created:>{}'.format(week_ago_date)], "per_page":str(required_count), "sort":"stars"}
+    payload = {'q':'created:>{}'.format(week_ago_date), "per_page":str(required_count), "sort":"stars"}
     response = requests.get("https://api.github.com/search/repositories", params=payload)
     trend_repositories = [(repo["html_url"], repo["name"], repo["stargazers_count"], repo["open_issues"])\
      for repo in response.json()["items"]]
